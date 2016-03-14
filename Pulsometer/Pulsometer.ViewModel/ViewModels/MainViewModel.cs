@@ -10,10 +10,5 @@ namespace Pulsometer.ViewModel.ViewModels
         {
             this.access = access;
         }
-
-        public void OnButtonClick()
-        {
-            access.StartHRMSensor();
-        }
     }
 }

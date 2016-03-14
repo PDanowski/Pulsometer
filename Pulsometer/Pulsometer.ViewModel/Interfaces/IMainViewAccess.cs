@@ -2,6 +2,6 @@
 {
     public interface IMainViewAccess
     {
-        void StartHRMSensor();
+        //void StartHRMSensor();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.Unity;
-using Pulsometer.Services;
 using Pulsometer.ViewModel.Interfaces;
 
 namespace Pulsometer.Dependencies
