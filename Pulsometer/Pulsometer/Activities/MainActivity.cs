@@ -1,4 +1,8 @@
-﻿using Android.App;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Hardware;
@@ -35,7 +39,19 @@ namespace Pulsometer.Activities
         {
             heartRate = FindViewById<TextView>(Resource.Id.HeartRate);
             var button = FindViewById<Button>(Resource.Id.MyButton);
+            button.Click += (sender, args) => HRMSensorEmulator();
             button.Click += (sender, args) => FindHRMSensore();
+        }
+
+        private async void HRMSensorEmulator()
+        {
+            Random rnd = new Random();
+
+            while (true)
+            {
+                await Task.Delay(500);
+                Log.Debug("HRM_emulator", $"Value: {rnd.Next(50, 120)}");
+            }
         }
 
         public void FindHRMSensore()

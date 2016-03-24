@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsometer.View", "Pulsomet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsometer.ViewModel", "Pulsometer.ViewModel\Pulsometer.ViewModel.csproj", "{718F356F-0E38-49F5-ADC9-A56CD4CB791E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsometer.Model", "Pulsometer.Model\Pulsometer.Model.csproj", "{CA1FAB67-9AEC-4D65-AB42-CB06420FF568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,13 +18,17 @@ Global
 		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{6FA2185F-8721-48DE-90F0-6131402AE3F0}.Release|Any CPU.Deploy.0 = Debug|Any CPU
 		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{718F356F-0E38-49F5-ADC9-A56CD4CB791E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{CA1FAB67-9AEC-4D65-AB42-CB06420FF568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1FAB67-9AEC-4D65-AB42-CB06420FF568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1FAB67-9AEC-4D65-AB42-CB06420FF568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1FAB67-9AEC-4D65-AB42-CB06420FF568}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
