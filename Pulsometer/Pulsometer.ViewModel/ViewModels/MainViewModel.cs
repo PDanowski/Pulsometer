@@ -1,6 +1,4 @@
 ﻿using System;
-using Pulsometer.Model;
-using Pulsometer.Model.Models;
 using Pulsometer.Model.SQLiteConnection;
 using Pulsometer.ViewModel.Interfaces;
 

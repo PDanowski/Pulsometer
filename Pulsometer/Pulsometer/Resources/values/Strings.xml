@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Zmierz puls</string>
-    <string name="ApplicationName">Pulsometer</string>
+  <string name="Hello">Zmierz puls</string>
+  <string name="ApplicationName">Pulsometer</string>
+
+  <string name="CalendarItem">Kalendarz</string>
+  <string name="SettingsItem">Ustawienia</string>
+  <string name="InfoItem">Informacje</string>
+
+  <string name="openDrawer">Drawer Opened</string>
+  <string name="closeDrawer">Drawer Closed</string>
 </resources>
