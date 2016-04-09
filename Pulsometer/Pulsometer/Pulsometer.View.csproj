@@ -113,6 +113,7 @@
     <Compile Include="Dependencies\Configuration.cs" />
     <Compile Include="Dependencies\Container.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Dialogs\CompletedMeasureDialog.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -126,6 +127,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Settings.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MeasureCompleted.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

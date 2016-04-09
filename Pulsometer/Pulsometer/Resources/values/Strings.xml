@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="Hello">Zmierz puls</string>
+  <string name="MeasureHeartRate">Zmierz puls</string>
   <string name="ApplicationName">Pulsometer</string>
 
   <string name="CalendarItem">Kalendarz</string>
@@ -9,4 +9,12 @@
 
   <string name="openDrawer">Drawer Opened</string>
   <string name="closeDrawer">Drawer Closed</string>
+
+  <string name="measuringPulse">Trwa mierzenie pulsu</string>
+  <string name="measureCompleted">Pomiar wykonany poprawnie</string>
+  <string name="release">Pomiar wykonany. Proszę puścić czujnik</string>
+  <string name="cancel">Anuluj</string>
+  <string name="save">Zapisz</string>
+  <string name="addNote">Dodaj notatkę</string>
+  
 </resources>

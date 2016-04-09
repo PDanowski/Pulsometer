@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using Pulsometer.Model.SQLiteConnection;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
 
@@ -16,6 +17,7 @@ namespace Pulsometer.ViewModel.Dependencies
             configured = true;
 
             container.RegisterType<IViewModelsFactory, ViewModelsFactory>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ISQLiteConnector, SQLiteConnector>(new ContainerControlledLifetimeManager());
         }
     }
 }

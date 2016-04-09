@@ -12,8 +12,11 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Pulsometer.Dependencies;
+using Pulsometer.Dialogs;
+using Pulsometer.ViewModel;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
+using AlertDialog = Android.App.AlertDialog;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Pulsometer.Activities
@@ -23,17 +26,20 @@ namespace Pulsometer.Activities
     public class MainActivity : AppCompatActivity, IMainViewAccess, ISensorEventListener
     {
         private readonly MainViewModel viewModel;
-        private TextView heartRate;
         private SupportToolbar toolbar;
         private DrawerLayout mainDrawer;
         private NavigationView navigationView;
         private ActionBarDrawerToggle myActionBarDrawerToggle;
         private Button measureHeartRateButton;
+        private ProgressDialog measureProgress;
+
+        private bool isMeasureTargetReached = false;
 
         public MainActivity()
         {
             var viewModelFactory = Container.Resolve<IViewModelsFactory>();
-            this.viewModel = viewModelFactory.GetMainViewModel(this);
+            viewModel = viewModelFactory.GetMainViewModel(this);
+            viewModel.ListReachedTargetEvent += OnListReachedTargetEvent;
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -43,6 +49,12 @@ namespace Pulsometer.Activities
             InitializeObjects();
             SetSupportActionBar(toolbar);
             SetUpToolbar();
+        }
+
+        private void OnListReachedTargetEvent(object sender, EventArgs eventArgs)
+        {
+            isMeasureTargetReached = true;
+            measureProgress.SetTitle(Resources.GetString(Resource.String.release));
         }
 
         private void SetUpToolbar()
@@ -55,20 +67,23 @@ namespace Pulsometer.Activities
 
         private void InitializeObjects()
         {
-            heartRate = FindViewById<TextView>(Resource.Id.HeartRate);
             toolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             mainDrawer = FindViewById<DrawerLayout>(Resource.Id.drawerLayout);
             navigationView = FindViewById<NavigationView>(Resource.Id.navigationView);
             measureHeartRateButton = FindViewById<Button>(Resource.Id.MeasureHeartRate);
+            measureHeartRateButton.Click += MeasureHeartRateButtonOnClick;
             myActionBarDrawerToggle = new ActionBarDrawerToggle(this, mainDrawer, Resource.String.openDrawer, Resource.String.closeDrawer);
-
-            // measureHeartRateButton.Click += (sender, args) => HRMSensorEmulator();
-
-            measureHeartRateButton.Click += (sender, args) => FindHRMSensore();
 
             navigationView.NavigationItemSelected += HandleNvNavigationNavigationItemSelected;
             navigationView.ItemIconTintList = null;
         }
+
+        private void MeasureHeartRateButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            viewModel.StartMeasure();
+        }
+
+        
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
@@ -117,19 +132,6 @@ namespace Pulsometer.Activities
             }
         }
 
-        public void FindHRMSensore()
-        {
-            var sensorManager = (SensorManager)this.GetSystemService(Context.SensorService);
-
-            var heartRateSensor = sensorManager.GetDefaultSensor(SensorType.HeartRate);
-
-            if (heartRateSensor != null)
-            {
-                sensorManager.RegisterListener(this, heartRateSensor, SensorDelay.Fastest);
-            }
-
-        }
-
         public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
         {
 
@@ -137,9 +139,67 @@ namespace Pulsometer.Activities
 
         public void OnSensorChanged(SensorEvent e)
         {
-            RunOnUiThread(() => heartRate.Text = e.Values[0].ToString());
+            if (e.Accuracy == SensorStatus.AccuracyHigh)
+            {
+                UpdateProgressBar();
+                viewModel.RegisterSingleMeasurement(e.Values[0]);
+            }
+
+            if (e.Accuracy == SensorStatus.Unreliable)
+            {
+                if (isMeasureTargetReached)
+                {
+                    viewModel.StopMeasure();
+                }
+            }
 
             Log.Debug("TAG", $"Value: {e.Values[0]}, Accuracy: {e.Accuracy}");
+        }
+
+        private void UpdateProgressBar()
+        {
+            RunOnUiThread(() => measureProgress.Progress = measureProgress.Progress + 1);
+        }
+
+        ///////////////// IMainViewAccess Implementation /////////////////////////////////////////
+
+        void IMainViewAccess.RegisterHRMSensore()
+        {
+            isMeasureTargetReached = false;
+            var sensorManager = (SensorManager)this.GetSystemService(Context.SensorService);
+            var heartRateSensor = sensorManager.GetDefaultSensor(SensorType.HeartRate);
+            if (heartRateSensor != null)
+            {
+                sensorManager.RegisterListener(this, heartRateSensor, SensorDelay.Fastest);
+            }
+        }
+
+        void IMainViewAccess.UnregisterHRMSensore()
+        {
+            var sensorManager = (SensorManager)this.GetSystemService(Context.SensorService);
+            sensorManager.UnregisterListener(this);
+        }
+
+        void IMainViewAccess.DisplayCompletedMeasureDialog(float measureValue)
+        {
+            var completedMeasureDialog = new CompletedMeasureDialog(this, LayoutInflater, viewModel);
+            completedMeasureDialog.Show();
+            completedMeasureDialog.HeartRate = measureValue;
+        }
+
+        void IMainViewAccess.DisplayProgressDialog()
+        {
+            measureProgress = new ProgressDialog(this);
+            measureProgress.SetMessage(Resources.GetString(Resource.String.measuringPulse));
+            measureProgress.SetProgressStyle(ProgressDialogStyle.Horizontal);
+            measureProgress.Max = Constans.ListTarget;
+            measureProgress.SetCancelable(false);
+            measureProgress.Show();
+        }
+
+        void IMainViewAccess.CloseProgressDialog()
+        {
+            measureProgress.Dismiss();
         }
     }
 }

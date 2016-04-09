@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Pulsometer.Model.SQLiteConnection;
 
-namespace Pulsometer.Model
+namespace Pulsometer.Model.Models
 {
     public enum Conditions
     {
@@ -15,7 +13,7 @@ namespace Pulsometer.Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public int Pulse { get; set; }
+        public float Value { get; set; }
         public string Note { get; set; }
         public DateTime Date { get; set; }
         public Conditions Condition { get; set; }

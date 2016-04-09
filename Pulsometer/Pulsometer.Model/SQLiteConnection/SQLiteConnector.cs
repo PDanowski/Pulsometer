@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using Pulsometer.Model.Models;
 
 namespace Pulsometer.Model.SQLiteConnection
 {
-    public class SQLiteConnector
+    public class SQLiteConnector : ISQLiteConnector
     {
-        private SQLiteAsyncConnection connection;
+        private readonly SQLiteAsyncConnection connection;
 
         public SQLiteConnector()
         {
@@ -54,7 +55,7 @@ namespace Pulsometer.Model.SQLiteConnection
             return query.ToListAsync().Result;
         }
 
-        public Measurement SelectFristOrDefault(DateTime date)
+        public Measurement SelectFirstOrDefault(DateTime date)
         {
             var query = connection.Table<Measurement>().Where(x => x.Date.Equals(date));
 

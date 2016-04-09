@@ -1,17 +1,20 @@
-﻿using Pulsometer.ViewModel.Interfaces;
+﻿using Pulsometer.Model.SQLiteConnection;
+using Pulsometer.ViewModel.Interfaces;
 
 namespace Pulsometer.ViewModel.ViewModels
 {
     public class ViewModelsFactory : IViewModelsFactory
     {
-        public ViewModelsFactory()
-        {
+        private readonly ISQLiteConnector sqLiteConnector;
 
+        public ViewModelsFactory(ISQLiteConnector sqLiteConnector)
+        {
+            this.sqLiteConnector = sqLiteConnector;
         }
 
         public MainViewModel GetMainViewModel(IMainViewAccess access)
         {
-            return new MainViewModel(access);
+            return new MainViewModel(access, sqLiteConnector);
         }
 
     }
