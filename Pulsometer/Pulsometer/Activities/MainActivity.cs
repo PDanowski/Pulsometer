@@ -121,15 +121,20 @@ namespace Pulsometer.Activities
             }
         }
 
-        private async void HRMSensorEmulator()
+        private async void EmulateHrmSensor()
         {
-            Random rnd = new Random();
+            Random emulator = new Random();
 
-            while (true)
+            while (!isMeasureTargetReached) 
             {
-                await Task.Delay(500);
-                Log.Debug("HRM_emulator", $"Value: {rnd.Next(50, 120)}");
+                UpdateProgressBar();
+                Log.Debug("HRM_emulator", $"Value: {emulator.Next(50, 120)}");
+                viewModel.RegisterSingleMeasurement(emulator.Next(50, 120));
+
+                await Task.Delay(1200);
             }
+
+            viewModel.StopMeasure();
         }
 
         public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
@@ -171,6 +176,10 @@ namespace Pulsometer.Activities
             if (heartRateSensor != null)
             {
                 sensorManager.RegisterListener(this, heartRateSensor, SensorDelay.Fastest);
+            }
+            else
+            {
+                EmulateHrmSensor();
             }
         }
 
