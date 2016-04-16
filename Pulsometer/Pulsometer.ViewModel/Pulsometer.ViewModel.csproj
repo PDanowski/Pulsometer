@@ -79,9 +79,11 @@
   <ItemGroup>
     <Compile Include="Constans.cs" />
     <Compile Include="Dependencies\Configuration.cs" />
+    <Compile Include="Interfaces\ICalendarViewAccess.cs" />
     <Compile Include="Interfaces\IMainViewAccess.cs" />
     <Compile Include="Interfaces\IViewModelsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelsFactory.cs" />
   </ItemGroup>
@@ -93,6 +95,9 @@
       <Project>{ca1fab67-9aec-4d65-ab42-cb06420ff568}</Project>
       <Name>Pulsometer.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

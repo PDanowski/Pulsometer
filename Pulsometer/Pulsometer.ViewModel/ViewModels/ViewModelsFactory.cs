@@ -17,5 +17,10 @@ namespace Pulsometer.ViewModel.ViewModels
             return new MainViewModel(access, sqLiteConnector);
         }
 
+        public CalendarViewModel GetCalendarViewModel(ICalendarViewAccess access)
+        {
+            return new CalendarViewModel(access, sqLiteConnector);
+        }
+
     }
 }

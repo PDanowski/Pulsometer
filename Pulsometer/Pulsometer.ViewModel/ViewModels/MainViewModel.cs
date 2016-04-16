@@ -53,7 +53,7 @@ namespace Pulsometer.ViewModel.ViewModels
             var measurement = new Measurement()
             {
                 Value = measurementValue,
-                Date = DateTime.Now, 
+                Date = DateTime.Now.AddDays(-2), 
                 Note = note
             };
 

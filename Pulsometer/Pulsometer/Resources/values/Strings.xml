@@ -17,4 +17,7 @@
   <string name="save">Zapisz</string>
   <string name="addNote">Dodaj notatkę</string>
 
+  <string name="next">Następny</string>
+  <string name="previous">Poporzedni</string>
+
 </resources>
