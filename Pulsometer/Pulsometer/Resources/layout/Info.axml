@@ -24,12 +24,10 @@
                 android:id="@+id/ScrollView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-                <TextView
+                <WebView
                     android:id="@+id/InfoText"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="@string/InfoString"
-                    android:textSize="20sp" />
+                    android:layout_height="fill_parent" />
             </ScrollView>
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -11,9 +12,11 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using Android.Webkit;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Pulsometer.Activities
@@ -23,6 +26,7 @@ namespace Pulsometer.Activities
     {
         private SupportToolbar toolbar;
         private DrawerLayout mainDrawer;
+        private WebView infoText;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,6 +53,19 @@ namespace Pulsometer.Activities
         {
             toolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             mainDrawer = FindViewById<DrawerLayout>(Resource.Id.drawerLayout);
+            infoText = FindViewById<WebView>(Resource.Id.InfoText);
+
+            infoText.LoadDataWithBaseURL(null, LoadHtml("InfoText.html"), "text/html", "utf-8", null);
+        }
+
+        private string LoadHtml(string filename)
+        {
+            String content = "";
+            using (StreamReader stream = new StreamReader(Assets.Open(filename)))
+            {
+                content = stream.ReadToEnd();
+            }
+            return content;
         }
 
     }
