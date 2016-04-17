@@ -4,19 +4,24 @@ using System.Linq;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Support.V7.App;
+using Android.Views;
 using Android.Widget;
 using com.alliance.calendar;
 using Java.Util;
 using Pulsometer.Dependencies;
+using Pulsometer.Dialogs;
 using Pulsometer.Model.Models;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
+using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Pulsometer.Activities
 {
-    [Activity(Label = "Calendar", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class CalendarActivity : Activity, ICalendarViewAccess
+    [Activity(Label = "@string/calendarItem", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
+    public class CalendarActivity : AppCompatActivity, ICalendarViewAccess
     {
+        private SupportToolbar toolbar;
         private CustomCalendar calendar;
         private readonly CalendarViewModel viewModel;
 
@@ -33,8 +38,17 @@ namespace Pulsometer.Activities
             SetContentView(Resource.Layout.Calendar);
 
             InitializeObjects();
+            SetUpToolbar();
 
             viewModel.InfrastructureReady();
+        }
+
+        private void SetUpToolbar()
+        {
+            SetSupportActionBar(toolbar);
+
+            SupportActionBar.SetHomeButtonEnabled(true);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
         }
 
         private void InitializeObjects()
@@ -43,6 +57,14 @@ namespace Pulsometer.Activities
             calendar.NextButtonText = Resources.GetString(Resource.String.next);
             calendar.PreviousButtonText = Resources.GetString(Resource.String.previous);
             calendar.OnCalendarSelectedDate += CalendarOnOnCalendarSelectedDate;
+
+            toolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            Finish();
+            return base.OnOptionsItemSelected(item);
         }
 
         private void CalendarOnOnCalendarSelectedDate(object sender, CalendarDateSelectionEventArgs eventArgs)
@@ -64,7 +86,21 @@ namespace Pulsometer.Activities
 
         public void OpenWindowWithSelectedMeasurements(List<Measurement> measurements)
         {
+            if (measurements.Count == 0)
+            {
+                HandleEmptyMeasurementList();
+                return;
+            }
 
+            var dialog = new MeasuresOfDayDialog(this, LayoutInflater, viewModel);
+
+            dialog.Show(measurements);
+        }
+
+        private void HandleEmptyMeasurementList()
+        {
+            var handler = new Handler(Looper.MainLooper);
+            handler.Post(() => Toast.MakeText(this, Resources.GetString(Resource.String.lackOfMeasurements), ToastLength.Long).Show());
         }
     }
 }

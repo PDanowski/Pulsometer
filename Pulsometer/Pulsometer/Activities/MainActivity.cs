@@ -6,6 +6,7 @@ using Android.Content.PM;
 using Android.Hardware;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Util;
@@ -83,7 +84,15 @@ namespace Pulsometer.Activities
             viewModel.StartMeasure();
         }
 
-        
+        public override void OnBackPressed()
+        {
+            if (mainDrawer.IsDrawerOpen(GravityCompat.Start))
+            {
+                mainDrawer.CloseDrawers();
+                return;
+            }
+            base.OnBackPressed();
+        }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
@@ -202,13 +211,19 @@ namespace Pulsometer.Activities
             measureProgress.SetMessage(Resources.GetString(Resource.String.measuringPulse));
             measureProgress.SetProgressStyle(ProgressDialogStyle.Horizontal);
             measureProgress.Max = Constans.ListTarget;
-            measureProgress.SetCancelable(false);
             measureProgress.Show();
         }
 
         void IMainViewAccess.CloseProgressDialog()
         {
             measureProgress.Dismiss();
+        }
+
+        void IMainViewAccess.DisplaySuccessfullSavedDataMessage()
+        {
+            var handler = new Handler(Looper.MainLooper);
+            handler.Post(() => Toast.MakeText(this, Resources.GetString(Resource.String.successfullSavedData), ToastLength.Long).Show());
+
         }
     }
 }

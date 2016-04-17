@@ -8,5 +8,6 @@
         void UnregisterHRMSensore();
         void DisplayProgressDialog();
         void CloseProgressDialog();
+        void DisplaySuccessfullSavedDataMessage();
     }
 }

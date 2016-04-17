@@ -21,7 +21,7 @@ using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Pulsometer.Activities
 {
-    [Activity(Label = "Informacje", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/infoItem", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
     public class InfoActivity : AppCompatActivity
     {
         private SupportToolbar toolbar;

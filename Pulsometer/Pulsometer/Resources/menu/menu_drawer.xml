@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/CalendarItem"
-        android:title="@string/CalendarItem"
+        android:title="@string/calendarItem"
         android:icon="@drawable/Calendar"/>
     <item
         android:id="@+id/InfoItem"
-        android:title="@string/InfoItem"
+        android:title="@string/infoItem"
         android:icon="@drawable/Info"/>
     <item
         android:id="@+id/SettingsItem"
-        android:title="@string/SettingsItem"
+        android:title="@string/settingsItem"
         android:icon="@drawable/Settings"/>
 </menu>

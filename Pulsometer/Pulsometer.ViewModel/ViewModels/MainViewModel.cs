@@ -58,6 +58,8 @@ namespace Pulsometer.ViewModel.ViewModels
             };
 
             sqLiteConnector.InsertAsync(measurement);
+
+            access.DisplaySuccessfullSavedDataMessage();
         }
 
         public event EventHandler<EventArgs> ListReachedTargetEvent;

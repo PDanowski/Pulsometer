@@ -24,7 +24,7 @@
                 android:id="@+id/MeasureHeartRate"
                 android:layout_width="fill_parent"
                 android:layout_height="96dp"
-                android:text="@string/MeasureHeartRate" />
+                android:text="@string/measureHeartRate" />
         </LinearLayout>
     <!-- The Left Navigation Drawer -->
         <android.support.design.widget.NavigationView

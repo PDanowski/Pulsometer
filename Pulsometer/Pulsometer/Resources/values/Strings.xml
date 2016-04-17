@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="MeasureHeartRate">Zmierz puls</string>
-  <string name="ApplicationName">Pulsometer</string>
-
-  <string name="CalendarItem">Kalendarz</string>
-  <string name="SettingsItem">Ustawienia</string>
-  <string name="InfoItem">Informacje</string>
+  <string name="applicationName">Pulsometer</string>
+  <string name="calendarItem">Kalendarz</string>
+  <string name="settingsItem">Ustawienia</string>
+  <string name="infoItem">Informacje</string>
 
   <string name="openDrawer">Drawer Opened</string>
   <string name="closeDrawer">Drawer Closed</string>
 
+  <string name="measureHeartRate">Zmierz puls</string>
   <string name="measuringPulse">Trwa mierzenie pulsu</string>
   <string name="measureCompleted">Pomiar wykonany poprawnie</string>
   <string name="release">Pomiar wykonany. Proszę puścić czujnik</string>
@@ -18,6 +17,11 @@
   <string name="addNote">Dodaj notatkę</string>
 
   <string name="next">Następny</string>
-  <string name="previous">Poporzedni</string>
+  <string name="previous">Poprzedni</string>
+  <string name="measurementTime">Czas pomiaru:</string>
+  <string name="measurementValue">Wartość pomiaru:</string>
+  
+  <string name="lackOfMeasurements">Brak pomiarów w tym dniu</string>
+  <string name="successfullSavedData">Pomiar zapisany poprawnie</string>
 
 </resources>
