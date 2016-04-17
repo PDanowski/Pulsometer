@@ -11,7 +11,6 @@ namespace Pulsometer.ViewModel.ViewModels
     {
         private readonly ICalendarViewAccess access;
         private readonly ISQLiteConnector sqLiteConnector;
-        private List<Measurement> measurements;
 
         public CalendarViewModel(ICalendarViewAccess access, ISQLiteConnector sqLiteConnector)
         {
@@ -19,35 +18,25 @@ namespace Pulsometer.ViewModel.ViewModels
             this.sqLiteConnector = sqLiteConnector;
         }
 
-        public void InfrastructureReady()
+        public async void InfrastructureReady()
         {
-            FetchMeasurements();
             SetMinDate();
+            var measurements = await sqLiteConnector.SelectAllAsync();
             access.SetCalendarModels(measurements);
         }
 
-        private void FetchMeasurements()
+        private async void SetMinDate()
         {
-            measurements = sqLiteConnector.SelectAll();
-        }
-
-        private void SetMinDate()
-        {
-            var firstOrDefaultMeasurement = measurements.FirstOrDefault();
+            var firstOrDefaultMeasurement = await sqLiteConnector.SelectFirstOrDefaultAsync();
             if (firstOrDefaultMeasurement != null)
             {
                 access.SetMinDate(firstOrDefaultMeasurement.Date);
             }
         }
 
-        public void OnCalendarSelectedDate(DateTime selectedDate)
+        public async void OnCalendarSelectedDate(DateTime selectedDate)
         {
-            var measurementsOfSelectedDate = measurements
-                .Where(m =>
-                    m.Date.Day == selectedDate.Day &&
-                    m.Date.Month == selectedDate.Month &&
-                    m.Date.Year == selectedDate.Year)
-                .ToList();
+            var measurementsOfSelectedDate = await sqLiteConnector.SelectAllByDateAsync(selectedDate);
 
             access.OpenWindowWithSelectedMeasurements(measurementsOfSelectedDate);
         }

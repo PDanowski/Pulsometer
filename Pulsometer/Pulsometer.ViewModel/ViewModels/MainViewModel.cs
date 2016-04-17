@@ -18,7 +18,7 @@ namespace Pulsometer.ViewModel.ViewModels
         {
             this.access = access;
             this.sqLiteConnector = new SQLiteConnector();
-            sqLiteConnector.CreateTable();
+            sqLiteConnector.CreateTableAsync();
         }
 
         public void RegisterSingleMeasurement(float measurement)
@@ -53,11 +53,11 @@ namespace Pulsometer.ViewModel.ViewModels
             var measurement = new Measurement()
             {
                 Value = measurementValue,
-                Date = DateTime.Now.AddDays(-2), 
+                Date = DateTime.Now, 
                 Note = note
             };
 
-            sqLiteConnector.Insert(measurement);
+            sqLiteConnector.InsertAsync(measurement);
         }
 
         public event EventHandler<EventArgs> ListReachedTargetEvent;

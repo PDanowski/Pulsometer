@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using Pulsometer.Model.Models;
 
 namespace Pulsometer.Model.SQLiteConnection
@@ -9,58 +10,57 @@ namespace Pulsometer.Model.SQLiteConnection
     public class SQLiteConnector : ISQLiteConnector
     {
         private readonly SQLiteAsyncConnection connection;
+        private const string DatabaseName = "pulsometer.db3";
 
         public SQLiteConnector()
         {
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),"pulsometer.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), DatabaseName);
             connection = new SQLiteAsyncConnection(dbPath);
         }
 
-        public void CreateTable()
+        public async void CreateTableAsync()
         {
-            connection.CreateTableAsync<Measurement>().ContinueWith(results =>
-            {
-                Debug.WriteLine("Table created");
-            });
+            await connection.CreateTableAsync<Measurement>();
         }
 
-        public void Insert(Measurement measurement)
+        public async void InsertAsync(Measurement measurement)
         {
-            connection.InsertAsync(measurement).ContinueWith(results =>
-            {
-                Debug.WriteLine("New measurement ID: {0}", measurement.Id);
-            });
+            await connection.InsertAsync(measurement);
         }
 
-        public void Update(Measurement measurement)
+        public async void UpdateAsync(Measurement measurement)
         {
-            connection.UpdateAsync(measurement).ContinueWith(results =>
-            {
-                Debug.WriteLine("Updated measurement ID: {0}", measurement.Id);
-            });
+            await connection.UpdateAsync(measurement);
         }
 
-        public void Delete(Measurement measurement)
+        public async void DeleteAsync(Measurement measurement)
         {
-            connection.DeleteAsync(measurement).ContinueWith(results =>
-            {
-                Debug.WriteLine("Deleted measurement ID: {0}", measurement.Id);
-            });
+            await connection.DeleteAsync(measurement);
         }
 
-        public List<Measurement> SelectAll()
+        public async Task<List<Measurement>> SelectAllAsync()
         {
-            var query = connection.Table<Measurement>();
+            var data = await connection.Table<Measurement>().ToListAsync();
 
-            return query.ToListAsync().Result;
+            return data;
         }
 
-        public Measurement SelectFirstOrDefault(DateTime date)
+        public async Task<List<Measurement>> SelectAllByDateAsync(DateTime date)
         {
-            var query = connection.Table<Measurement>().Where(x => x.Date.Equals(date));
+            var oneDayLaterDate = date.AddDays(1);
+            var data = await connection.Table<Measurement>()
+                .Where(m => m.Date >= date)
+                .Where(m => m.Date < oneDayLaterDate)
+                .ToListAsync();
 
-            return query.FirstOrDefaultAsync().Result;
+            return data;
         }
 
+        public async Task<Measurement> SelectFirstOrDefaultAsync()
+        {
+            var data = await connection.Table<Measurement>().FirstOrDefaultAsync();
+
+            return data;
+        }
     }
 }
