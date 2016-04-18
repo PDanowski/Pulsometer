@@ -17,16 +17,27 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 using Android.Webkit;
+using Pulsometer.Dependencies;
+using Pulsometer.Services;
+using Pulsometer.ViewModel.Interfaces;
+using Pulsometer.ViewModel.ViewModels;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Pulsometer.Activities
 {
     [Activity(Label = "@string/infoItem", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class InfoActivity : AppCompatActivity
+    public class InfoActivity : AppCompatActivity, IInfoViewAccess
     {
+        private readonly InfoViewModel viewModel;
         private SupportToolbar toolbar;
         private DrawerLayout mainDrawer;
         private WebView infoText;
+
+        public InfoActivity()
+        {
+            var viewModelFactory = Container.Resolve<IViewModelsFactory>();
+            viewModel = viewModelFactory.GetInfoViewModel(this);
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,7 +56,7 @@ namespace Pulsometer.Activities
         }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            Finish(); 
+            Finish();
             return base.OnOptionsItemSelected(item);
         }
 
@@ -55,18 +66,7 @@ namespace Pulsometer.Activities
             mainDrawer = FindViewById<DrawerLayout>(Resource.Id.drawerLayout);
             infoText = FindViewById<WebView>(Resource.Id.InfoText);
 
-            infoText.LoadDataWithBaseURL(null, LoadHtml("InfoText.html"), "text/html", "utf-8", null);
+            infoText.LoadDataWithBaseURL(null, viewModel.LoadHtml(Assets.Open("InfoText.html")), "text/html", "utf-8", null);
         }
-
-        private string LoadHtml(string filename)
-        {
-            String content = "";
-            using (StreamReader stream = new StreamReader(Assets.Open(filename)))
-            {
-                content = stream.ReadToEnd();
-            }
-            return content;
-        }
-
     }
 }
