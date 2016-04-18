@@ -125,6 +125,7 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Dialogs\CompletedMeasureDialog.cs" />
     <Compile Include="Dialogs\MeasuresOfDayDialog.cs" />
+    <Compile Include="Dialogs\WelcomeDialog.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,12 +150,17 @@
     <AndroidResource Include="Resources\layout\Measurement.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Welcome.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml">

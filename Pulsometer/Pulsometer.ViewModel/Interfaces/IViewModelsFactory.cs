@@ -6,5 +6,7 @@ namespace Pulsometer.ViewModel.Interfaces
     {
         MainViewModel GetMainViewModel(IMainViewAccess access);
         CalendarViewModel GetCalendarViewModel(ICalendarViewAccess access);
+        InfoViewModel GetInfoViewModel(IInfoViewAccess access);
+
     }
 }

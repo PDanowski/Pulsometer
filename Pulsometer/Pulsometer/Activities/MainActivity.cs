@@ -167,7 +167,7 @@ namespace Pulsometer.Activities
                 }
             }
 
-            Log.Debug("TAG", $"Value: {e.Values[0]}, Accuracy: {e.Accuracy}");
+            Log.Debug("HRM", $"Value: {e.Values[0]}, Accuracy: {e.Accuracy}");
         }
 
         private void UpdateProgressBar()
