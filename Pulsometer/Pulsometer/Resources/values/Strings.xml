@@ -4,6 +4,7 @@
   <string name="calendarItem">Kalendarz</string>
   <string name="settingsItem">Ustawienia</string>
   <string name="infoItem">Informacje</string>
+  <string name="welcome">Witaj użytkowniku !</string>
 
   <string name="openDrawer">Drawer Opened</string>
   <string name="closeDrawer">Drawer Closed</string>
@@ -14,7 +15,13 @@
   <string name="release">Pomiar wykonany. Proszę puścić czujnik</string>
   <string name="cancel">Anuluj</string>
   <string name="save">Zapisz</string>
+  <string name="exit">Wyjdź</string>
   <string name="addNote">Dodaj notatkę</string>
+  
+  <string name="enter">Wpisz</string>
+  <string name="name">Imię: </string>
+  <string name="age">Wiek: </string>
+  <string name="gender">Płeć: </string>
 
   <string name="next">Następny</string>
   <string name="previous">Poprzedni</string>
@@ -23,5 +30,10 @@
   
   <string name="lackOfMeasurements">Brak pomiarów w tym dniu</string>
   <string name="successfullSavedData">Pomiar zapisany poprawnie</string>
+
+  <string-array name="genderEnum">
+    <item>Mężczyzna</item>
+    <item>Kobieta</item>
+  </string-array>
 
 </resources>

@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Pulsometer.Model.Models;
 using Pulsometer.Model.SQLiteConnection;
+using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
 
 namespace Pulsometer.ViewModel.ViewModels
@@ -13,10 +15,12 @@ namespace Pulsometer.ViewModel.ViewModels
         private readonly IMainViewAccess access;
         private readonly ISQLiteConnector sqLiteConnector;
         private IList<SingleMeasurement> singleMeasurements;
+        private IUserConfiguration config;
 
-        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector)
+        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector, IUserConfiguration config)
         {
             this.access = access;
+            this.config = new UserConfiguration();
             this.sqLiteConnector = new SQLiteConnector();
             sqLiteConnector.CreateTableAsync();
         }
@@ -60,6 +64,30 @@ namespace Pulsometer.ViewModel.ViewModels
             sqLiteConnector.InsertAsync(measurement);
 
             access.DisplaySuccessfullSavedDataMessage();
+        }
+
+        public void SaveUserConfiguration()
+        {
+            UserSerializer.Serialize(config);
+        }
+
+        public void SetUserConfiguration(string name, string age, string gender)
+        {
+            config.Name = name;
+            config.Age = Int32.Parse(age);
+            config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
+            config.Notifications = new List<DateTime>();
+        }
+
+        public void LoadUserConfiguration()
+        {
+            config = UserSerializer.Deserialize();
+            config = null;
+            if (config == null)
+            {
+                config = new UserConfiguration();
+                access.DisplayWelcomeDialog();
+            }              
         }
 
         public event EventHandler<EventArgs> ListReachedTargetEvent;

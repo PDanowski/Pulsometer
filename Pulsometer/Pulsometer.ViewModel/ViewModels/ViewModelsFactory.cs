@@ -1,4 +1,6 @@
-﻿using Pulsometer.Model.SQLiteConnection;
+﻿using Pulsometer.Model.Models;
+using Pulsometer.Model.SQLiteConnection;
+using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
 
 namespace Pulsometer.ViewModel.ViewModels
@@ -6,15 +8,17 @@ namespace Pulsometer.ViewModel.ViewModels
     public class ViewModelsFactory : IViewModelsFactory
     {
         private readonly ISQLiteConnector sqLiteConnector;
+        private readonly IUserConfiguration userConfig;
 
-        public ViewModelsFactory(ISQLiteConnector sqLiteConnector)
+        public ViewModelsFactory(ISQLiteConnector sqLiteConnector, IUserConfiguration config)
         {
             this.sqLiteConnector = sqLiteConnector;
+            this.userConfig = config;
         }
 
         public MainViewModel GetMainViewModel(IMainViewAccess access)
         {
-            return new MainViewModel(access, sqLiteConnector);
+            return new MainViewModel(access, sqLiteConnector, userConfig);
         }
 
         public CalendarViewModel GetCalendarViewModel(ICalendarViewAccess access)
@@ -25,6 +29,11 @@ namespace Pulsometer.ViewModel.ViewModels
         public InfoViewModel GetInfoViewModel(IInfoViewAccess access)
         {
             return new InfoViewModel(access);
+        }
+
+        public SettingsViewModel GetSettingsViewModel(ISettingsViewAccess access)
+        {
+            return new SettingsViewModel(access, userConfig);
         }
     }
 }

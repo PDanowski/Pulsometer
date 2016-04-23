@@ -8,5 +8,6 @@
         void DisplayProgressDialog();
         void CloseProgressDialog();
         void DisplaySuccessfullSavedDataMessage();
+        void DisplayWelcomeDialog();
     }
 }

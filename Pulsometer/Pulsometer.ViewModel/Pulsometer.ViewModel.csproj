@@ -82,12 +82,14 @@
     <Compile Include="Interfaces\ICalendarViewAccess.cs" />
     <Compile Include="Interfaces\IInfoViewAccess.cs" />
     <Compile Include="Interfaces\IMainViewAccess.cs" />
+    <Compile Include="Interfaces\ISettingsViewAccess.cs" />
     <Compile Include="Interfaces\IViewModelsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileTools.cs" />
     <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelsFactory.cs" />
   </ItemGroup>
   <ItemGroup>

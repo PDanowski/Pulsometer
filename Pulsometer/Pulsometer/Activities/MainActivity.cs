@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Pulsometer.Dependencies;
 using Pulsometer.Dialogs;
+using Pulsometer.Model.Models;
 using Pulsometer.ViewModel;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
@@ -50,6 +51,7 @@ namespace Pulsometer.Activities
             InitializeObjects();
             SetSupportActionBar(toolbar);
             SetUpToolbar();
+            viewModel.LoadUserConfiguration();
         }
 
         private void OnListReachedTargetEvent(object sender, EventArgs eventArgs)
@@ -224,6 +226,12 @@ namespace Pulsometer.Activities
             var handler = new Handler(Looper.MainLooper);
             handler.Post(() => Toast.MakeText(this, Resources.GetString(Resource.String.successfullSavedData), ToastLength.Long).Show());
 
+        }
+
+        void IMainViewAccess.DisplayWelcomeDialog()
+        {
+            var welcomeDialog = new WelcomeDialog(this, LayoutInflater, viewModel);
+            welcomeDialog.Show();
         }
     }
 }
