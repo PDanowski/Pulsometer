@@ -25,6 +25,66 @@
         android:scrollbars="vertical"
         android:maxHeight="320dp"
         android:hint="@string/addNote" />
+    <TextView
+        android:text="Wybierz bieżący stan"
+        style="@style/optionsHeader" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/option">
+            <ToggleButton
+                android:id="@+id/generalState"
+                android:background="@drawable/General"
+                style="@style/optionToogle" />
+            <TextView
+                android:text="Ogólny"
+                style="@style/optionDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/option">
+            <ToggleButton
+                android:id="@+id/beforeExerciseState"
+                android:background="@drawable/BeforeExercise"
+                style="@style/optionToogle" />
+            <TextView
+                android:text="Przed\nćwiczeniem"
+                style="@style/optionDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/option">
+            <ToggleButton
+                android:id="@+id/afterExerciseState"
+                android:background="@drawable/AfterExercise"
+                style="@style/optionToogle" />
+            <TextView
+                android:text="Po\nćwiczeniu"
+                style="@style/optionDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/option">
+            <ToggleButton
+                android:id="@+id/restState"
+                android:background="@drawable/Rest"
+                style="@style/optionToogle" />
+            <TextView
+                android:text="Odpoczynek"
+                style="@style/optionDescription" />
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.SQLiteConnection;
 using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
@@ -50,7 +51,7 @@ namespace Pulsometer.ViewModel.ViewModels
             access.UnregisterHRMSensore();
         }
 
-        public void SaveMeasurement(string note)
+        public void SaveMeasurement(string note, State? state)
         {
             var measurementValue = singleMeasurements.Average(m => m.Value);
 
@@ -58,7 +59,8 @@ namespace Pulsometer.ViewModel.ViewModels
             {
                 Value = measurementValue,
                 Date = DateTime.Now, 
-                Note = note
+                Note = note,
+                State = state
             };
 
             sqLiteConnector.InsertAsync(measurement);
@@ -82,7 +84,7 @@ namespace Pulsometer.ViewModel.ViewModels
         public void LoadUserConfiguration()
         {
             config = UserSerializer.Deserialize();
-            config = null;
+
             if (config == null)
             {
                 config = new UserConfiguration();

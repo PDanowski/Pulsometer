@@ -1,13 +1,9 @@
 ﻿using System;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.SQLiteConnection;
 
 namespace Pulsometer.Model.Models
 {
-    public enum Conditions
-    {
-        //TODO 
-    }
-
     [Table("Measurements")]
     public class Measurement
     {
@@ -16,6 +12,6 @@ namespace Pulsometer.Model.Models
         public float Value { get; set; }
         public string Note { get; set; }
         public DateTime Date { get; set; }
-        public Conditions Condition { get; set; }
+        public State? State { get; set; }
     }
 }
