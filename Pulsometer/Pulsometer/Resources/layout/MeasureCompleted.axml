@@ -26,7 +26,7 @@
         android:maxHeight="320dp"
         android:hint="@string/addNote" />
     <TextView
-        android:text="Wybierz bieżący stan"
+        android:text="@string/pickCurrentState"
         style="@style/optionsHeader" />
     <LinearLayout
         android:orientation="horizontal"
@@ -42,7 +42,7 @@
                 android:background="@drawable/General"
                 style="@style/optionToogle" />
             <TextView
-                android:text="Ogólny"
+                android:text="@string/generalState"
                 style="@style/optionDescription" />
         </LinearLayout>
         <LinearLayout
@@ -55,7 +55,7 @@
                 android:background="@drawable/BeforeExercise"
                 style="@style/optionToogle" />
             <TextView
-                android:text="Przed\nćwiczeniem"
+                android:text="@string/beforeExerciseState"
                 style="@style/optionDescription" />
         </LinearLayout>
         <LinearLayout
@@ -68,7 +68,7 @@
                 android:background="@drawable/AfterExercise"
                 style="@style/optionToogle" />
             <TextView
-                android:text="Po\nćwiczeniu"
+                android:text="@string/afterExerciseState"
                 style="@style/optionDescription" />
         </LinearLayout>
         <LinearLayout
@@ -81,7 +81,7 @@
                 android:background="@drawable/Rest"
                 style="@style/optionToogle" />
             <TextView
-                android:text="Odpoczynek"
+                android:text="@string/restState"
                 style="@style/optionDescription" />
         </LinearLayout>
     </LinearLayout>
