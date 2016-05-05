@@ -8,7 +8,7 @@ namespace Pulsometer.ViewModel.ViewModels
     public class ViewModelsFactory : IViewModelsFactory
     {
         private readonly ISQLiteConnector sqLiteConnector;
-        private readonly IUserConfiguration userConfig;
+        private IUserConfiguration userConfig;
 
         public ViewModelsFactory(ISQLiteConnector sqLiteConnector, IUserConfiguration config)
         {
@@ -16,9 +16,14 @@ namespace Pulsometer.ViewModel.ViewModels
             this.userConfig = config;
         }
 
+        public void SetUserConfiguration(IUserConfiguration config)
+        {
+            this.userConfig = config;
+        }
+
         public MainViewModel GetMainViewModel(IMainViewAccess access)
         {
-            return new MainViewModel(access, sqLiteConnector, userConfig);
+            return new MainViewModel(access, sqLiteConnector);
         }
 
         public CalendarViewModel GetCalendarViewModel(ICalendarViewAccess access)

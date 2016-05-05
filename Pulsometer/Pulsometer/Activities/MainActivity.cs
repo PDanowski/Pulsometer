@@ -15,6 +15,7 @@ using Android.Widget;
 using Pulsometer.Dependencies;
 using Pulsometer.Dialogs;
 using Pulsometer.Model.Models;
+using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
@@ -34,12 +35,13 @@ namespace Pulsometer.Activities
         private ActionBarDrawerToggle myActionBarDrawerToggle;
         private Button measureHeartRateButton;
         private ProgressDialog measureProgress;
+        private IViewModelsFactory viewModelFactory;
 
         private bool isMeasureTargetReached = false;
 
         public MainActivity()
         {
-            var viewModelFactory = Container.Resolve<IViewModelsFactory>();
+            viewModelFactory = Container.Resolve<IViewModelsFactory>();
             viewModel = viewModelFactory.GetMainViewModel(this);
             viewModel.ListReachedTargetEvent += OnListReachedTargetEvent;
         }
@@ -232,6 +234,11 @@ namespace Pulsometer.Activities
         {
             var welcomeDialog = new WelcomeDialog(this, LayoutInflater, viewModel);
             welcomeDialog.Show();
+        }
+
+        void IMainViewAccess.SetUserConfig(IUserConfiguration config)
+        {
+            viewModelFactory.SetUserConfiguration(config);
         }
     }
 }

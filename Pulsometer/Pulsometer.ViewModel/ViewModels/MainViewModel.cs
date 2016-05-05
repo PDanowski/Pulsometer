@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using Pulsometer.Model.Models;
@@ -18,10 +19,9 @@ namespace Pulsometer.ViewModel.ViewModels
         private IList<SingleMeasurement> singleMeasurements;
         private IUserConfiguration config;
 
-        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector, IUserConfiguration config)
+        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector)
         {
             this.access = access;
-            this.config = new UserConfiguration();
             this.sqLiteConnector = new SQLiteConnector();
             sqLiteConnector.CreateTableAsync();
         }
@@ -89,7 +89,9 @@ namespace Pulsometer.ViewModel.ViewModels
             {
                 config = new UserConfiguration();
                 access.DisplayWelcomeDialog();
-            }              
+            }
+
+            access.SetUserConfig(config);
         }
 
         public event EventHandler<EventArgs> ListReachedTargetEvent;

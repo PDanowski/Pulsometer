@@ -27,6 +27,7 @@ namespace Pulsometer.Activities
         private readonly LayoutInflater inflater;
         private readonly Context context;
         private readonly SettingsViewModel viewModel;
+        private readonly IViewModelsFactory viewModelFactory;
 
         private EditText name;
         private EditText age;
@@ -37,7 +38,7 @@ namespace Pulsometer.Activities
 
         public SettingsActivity()
         {
-            var viewModelFactory = Container.Resolve<IViewModelsFactory>();
+            viewModelFactory = Container.Resolve<IViewModelsFactory>();
             viewModel = viewModelFactory.GetSettingsViewModel(this);
         }
 
@@ -50,6 +51,7 @@ namespace Pulsometer.Activities
             InitializeObjects();
             SetSupportActionBar(toolbar);
             SetUpToolbar();
+            
         }
 
         private void InitializeObjects()
@@ -62,11 +64,41 @@ namespace Pulsometer.Activities
             saveButton = FindViewById<Button>(Resource.Id.saveButton);
 
             saveButton.Click += SaveButtonOnClick;
+
+            viewModel.SetFields();
+        }
+
+        public void SetField(string uname, Gender ugender, int uage, List<DateTime> unotifications)
+        {
+            name.Text = uname;
+            age.Text = uage.ToString();
+            gender.SetSelection(GetSpinnerIndex(gender, ugender.ToString()));
+        }
+
+        public void SetUserConfig(IUserConfiguration config)
+        {
+            viewModelFactory.SetUserConfiguration(config);
+        }
+
+        private int GetSpinnerIndex(Spinner spinner, String value)
+        {
+            int index = 0;
+
+            for (int i = 0; i < spinner.Adapter.Count; i++)
+            {
+                if (spinner.GetItemAtPosition(i).Equals(value))
+                {
+                    index = i;
+                }
+            }
+            return index;
         }
 
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-
+            viewModel.SetUserConfiguration(name.Text, age.Text, gender.SelectedItem.ToString());
+            viewModel.SaveUserConfiguration();
+            Toast.MakeText(this, "Zapisano", ToastLength.Short).Show();
         }
 
         private void SetUpToolbar()
@@ -80,6 +112,5 @@ namespace Pulsometer.Activities
             Finish();
             return base.OnOptionsItemSelected(item);
         }
-
     }
 }

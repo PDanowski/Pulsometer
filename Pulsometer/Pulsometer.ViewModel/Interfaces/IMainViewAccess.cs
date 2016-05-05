@@ -1,4 +1,6 @@
-﻿namespace Pulsometer.ViewModel.Interfaces
+﻿using Pulsometer.Model.XMLSerialization;
+
+namespace Pulsometer.ViewModel.Interfaces
 {
     public interface IMainViewAccess
     {
@@ -9,5 +11,6 @@
         void CloseProgressDialog();
         void DisplaySuccessfullSavedDataMessage();
         void DisplayWelcomeDialog();
+        void SetUserConfig(IUserConfiguration config);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Pulsometer.Model.Models;
@@ -18,6 +19,26 @@ namespace Pulsometer.ViewModel.ViewModels
         {
             this.access = access;
             this.config = config;
+        }
+
+        public void SetFields()
+        {
+            access.SetField(config.Name, config.Gender, config.Age, config.Notifications);
+            //+notifcations
+        }
+
+        public void SaveUserConfiguration()
+        {
+            UserSerializer.Serialize(config);
+            access.SetUserConfig(config);
+        }
+
+        public void SetUserConfiguration(string name, string age, string gender)
+        {
+            config.Name = name;
+            config.Age = Int32.Parse(age);
+            config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
+            config.Notifications = new List<DateTime>(); // set notifcations
         }
 
     }
