@@ -23,7 +23,7 @@ namespace Pulsometer.Dialogs
         private ToggleButton stateAfterExercise;
         private ToggleButton stateRest;
 
-        private State? state = null;
+        private State state;
 
         public CompletedMeasureDialog(Context context, LayoutInflater inflater, MainViewModel viewModel)
         {
@@ -39,6 +39,7 @@ namespace Pulsometer.Dialogs
             saveButton = dialog.FindViewById<Button>(Resource.Id.saveButton);
 
             stateGeneral = dialog.FindViewById<ToggleButton>(Resource.Id.generalState);
+            stateGeneral.Checked = true;
             stateBeforeExercise = dialog.FindViewById<ToggleButton>(Resource.Id.beforeExerciseState);
             stateAfterExercise = dialog.FindViewById<ToggleButton>(Resource.Id.afterExerciseState);
             stateRest = dialog.FindViewById<ToggleButton>(Resource.Id.restState);
@@ -62,15 +63,8 @@ namespace Pulsometer.Dialogs
 
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-            if (state != null)
-            {
-                viewModel.SaveMeasurement(noteEditText.Text, this.state);
-                dialog.Dismiss();
-            }
-            else
-            {
-                // TODO: User input validation
-            }
+            viewModel.SaveMeasurement(noteEditText.Text, this.state);
+            dialog.Dismiss();
         }
 
         public void Show()

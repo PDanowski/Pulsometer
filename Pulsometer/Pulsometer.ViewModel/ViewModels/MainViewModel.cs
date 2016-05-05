@@ -51,7 +51,7 @@ namespace Pulsometer.ViewModel.ViewModels
             access.UnregisterHRMSensore();
         }
 
-        public void SaveMeasurement(string note, State? state)
+        public void SaveMeasurement(string note, State state)
         {
             var measurementValue = singleMeasurements.Average(m => m.Value);
 

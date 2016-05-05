@@ -12,6 +12,6 @@ namespace Pulsometer.Model.Models
         public float Value { get; set; }
         public string Note { get; set; }
         public DateTime Date { get; set; }
-        public State? State { get; set; }
+        public State State { get; set; }
     }
 }
