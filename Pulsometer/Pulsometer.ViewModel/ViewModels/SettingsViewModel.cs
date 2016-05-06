@@ -23,8 +23,7 @@ namespace Pulsometer.ViewModel.ViewModels
 
         public void SetFields()
         {
-            access.SetField(config.Name, config.Gender, config.Age, config.Notifications);
-            //+notifcations
+            access.SetField(config.Name, config.Gender, config.Birthday);
         }
 
         public void SaveUserConfiguration()
@@ -33,12 +32,11 @@ namespace Pulsometer.ViewModel.ViewModels
             access.SetUserConfig(config);
         }
 
-        public void SetUserConfiguration(string name, string age, string gender)
+        public void SetUserConfiguration(string name, DateTime birthday, string gender)
         {
             config.Name = name;
-            config.Age = Int32.Parse(age);
+            config.Birthday= birthday;
             config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
-            config.Notifications = new List<DateTime>(); // set notifcations
         }
 
     }

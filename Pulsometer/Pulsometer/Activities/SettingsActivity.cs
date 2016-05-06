@@ -13,6 +13,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Pulsometer.Dependencies;
+using Pulsometer.Dialogs;
 using Pulsometer.Model.Models;
 using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
@@ -30,11 +31,14 @@ namespace Pulsometer.Activities
         private readonly IViewModelsFactory viewModelFactory;
 
         private EditText name;
-        private EditText age;
+        private TextView birthday;
         private Spinner gender;
         private Button saveButton;
+        private Button birthdayButton;
         private Toolbar toolbar;
         private DrawerLayout mainDrawer;
+
+        private DateTime selectedDate;
 
         public SettingsActivity()
         {
@@ -50,8 +54,7 @@ namespace Pulsometer.Activities
 
             InitializeObjects();
             SetSupportActionBar(toolbar);
-            SetUpToolbar();
-            
+            SetUpToolbar();       
         }
 
         private void InitializeObjects()
@@ -60,19 +63,33 @@ namespace Pulsometer.Activities
 
             name = FindViewById<EditText>(Resource.Id.name);
             gender = FindViewById<Spinner>(Resource.Id.gender);
-            age = FindViewById<EditText>(Resource.Id.age);
+            birthday = FindViewById<TextView>(Resource.Id.birthday);
             saveButton = FindViewById<Button>(Resource.Id.saveButton);
+            birthdayButton = FindViewById<Button>(Resource.Id.birthdayButton);
 
             saveButton.Click += SaveButtonOnClick;
+            birthdayButton.Click += ShowDatePickerDialog;
 
             viewModel.SetFields();
         }
 
-        public void SetField(string uname, Gender ugender, int uage, List<DateTime> unotifications)
+        public void SetField(string uname, Gender ugender, DateTime ubirthday)
         {
             name.Text = uname;
-            age.Text = uage.ToString();
+            birthday.Text = ubirthday.Date.ToShortDateString();
+            selectedDate = ubirthday;
             gender.SetSelection(GetSpinnerIndex(gender, ugender.ToString()));
+        }
+
+        public void ShowDatePickerDialog(object sender, EventArgs eventArgs)
+        {
+            DatePickerDialogFragment frag = DatePickerDialogFragment.NewInstance((delegate (DateTime time)
+            {
+                birthday.Text = time.Date.ToShortDateString();
+                selectedDate = time;
+            }), selectedDate);
+            frag.Show(FragmentManager, "Wybierz datê urodzin");
+
         }
 
         public void SetUserConfig(IUserConfiguration config)
@@ -96,7 +113,7 @@ namespace Pulsometer.Activities
 
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-            viewModel.SetUserConfiguration(name.Text, age.Text, gender.SelectedItem.ToString());
+            viewModel.SetUserConfiguration(name.Text, selectedDate, gender.SelectedItem.ToString());
             viewModel.SaveUserConfiguration();
             Toast.MakeText(this, "Zapisano", ToastLength.Short).Show();
         }

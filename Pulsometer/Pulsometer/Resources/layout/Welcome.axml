@@ -30,21 +30,29 @@
     </TableRow>
     <TableRow>
         <TextView
-            android:id="@+id/ageLabel"
+            android:id="@+id/birthdayLabel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
             android:textSize="18sp"
-            android:text="@string/age" />
-        <EditText
-            android:id="@+id/age"
+            android:text="@string/birthday" />
+        <Button
+            android:id="@+id/birthdayButton"
             android:layout_column="2"
-            android:layout_margin="20dp"
-            android:inputType="number"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/enter" />
+            android:padding="10dp"
+            android:text="@string/select" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/birthdayText"
+            android:layout_column="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/selectedDate" />
     </TableRow>
     <TableRow>
         <TextView

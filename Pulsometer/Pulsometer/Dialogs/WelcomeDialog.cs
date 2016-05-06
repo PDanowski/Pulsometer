@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -19,18 +20,22 @@ namespace Pulsometer.Dialogs
         private readonly MainViewModel viewModel;
         private readonly LayoutInflater inflater;
         private readonly Context context;
+        private readonly FragmentManager manager;
 
         private EditText name;
-        private EditText age;
+        private Button birthdayButton;
         private Spinner gender;
         private Button saveButton;
         private Button exitButton;
+        private TextView birthdayText;
+        private DateTime selectedDate;
 
-        public WelcomeDialog(Context context, LayoutInflater inflater, MainViewModel viewModel)
+        public WelcomeDialog(Context context, LayoutInflater inflater, MainViewModel viewModel, FragmentManager manager)
         {
             this.context = context;
             this.inflater = inflater;
             this.viewModel = viewModel;
+            this.manager = manager;
         }
 
         public void Show()
@@ -49,17 +54,31 @@ namespace Pulsometer.Dialogs
         {
             name = dialog.FindViewById<EditText>(Resource.Id.name);
             gender = dialog.FindViewById<Spinner>(Resource.Id.gender);
-            age = dialog.FindViewById<EditText>(Resource.Id.age);
+            birthdayText = dialog.FindViewById<TextView>(Resource.Id.birthdayText);
+            birthdayButton = dialog.FindViewById<Button>(Resource.Id.birthdayButton);
             saveButton = dialog.FindViewById<Button>(Resource.Id.saveButton);
             exitButton = dialog.FindViewById<Button>(Resource.Id.exitButton);
 
             saveButton.Click += SaveButtonOnClick;
             exitButton.Click += ExitButtonOnClick;
+            birthdayButton.Click += ShowDatePickerDialog;
+        }
+
+        public void ShowDatePickerDialog(object sender, EventArgs eventArgs)
+        {
+            DateTime defaultDate = DateTime.Today.AddYears(-15);
+            DatePickerDialogFragment frag = DatePickerDialogFragment.NewInstance((delegate (DateTime time) 
+            {
+                birthdayText.Text= time.Date.ToShortDateString();
+                selectedDate = time;
+            }), defaultDate);
+            frag.Show(manager, "Wybierz datê urodzin");
+
         }
 
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-            viewModel.SetUserConfiguration(name.Text, age.Text, gender.SelectedItem.ToString());
+            viewModel.SetUserConfiguration(name.Text, selectedDate, gender.SelectedItem.ToString());
             viewModel.SaveUserConfiguration();
             dialog.Dismiss();
             Toast.MakeText(context, "Zapisano", ToastLength.Short).Show();

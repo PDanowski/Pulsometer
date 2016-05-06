@@ -10,7 +10,7 @@ namespace Pulsometer.ViewModel.Interfaces
 {
     public interface ISettingsViewAccess
     {
-        void SetField(string name, Gender gender, int age, List<DateTime> notifications);
+        void SetField(string name, Gender gender, DateTime birthday);
         void SetUserConfig(IUserConfiguration config);
 
     }

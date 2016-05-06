@@ -19,8 +19,10 @@
   <string name="addNote">Dodaj notatkę</string>
   
   <string name="enter">Wpisz</string>
+  <string name="select">Wybierz</string>
+  <string name="selectedDate">Wybrana data</string>
   <string name="name">Imię: </string>
-  <string name="age">Wiek: </string>
+  <string name="birthday">Data urodzenia: </string>
   <string name="gender">Płeć: </string>
 
   <string name="next">Następny</string>

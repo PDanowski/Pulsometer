@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -12,70 +12,61 @@
         android:background="?attr/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
-    <TableRow>
-        <TextView
-            android:id="@+id/nameLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            android:textSize="18sp"
-            android:text="@string/name" />
-        <EditText
-            android:id="@+id/name"
-            android:layout_column="2"
-            android:layout_margin="20dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:id="@+id/ageLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            android:textSize="18sp"
-            android:text="@string/age" />
-        <EditText
-            android:id="@+id/age"
-            android:layout_column="2"
-            android:layout_margin="20dp"
-            android:inputType="number"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:id="@+id/genderLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            android:textSize="18sp"
-            android:text="@string/gender" />
-        <Spinner
-            android:id="@+id/gender"
-            android:layout_column="2"
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/genderEnum" />
-    </TableRow>
-    <TableRow>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="2">
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/save" />
-        </LinearLayout>
-    </TableRow>
-</TableLayout>
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:textSize="18sp"
+        android:text="@string/name" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_margin="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter" />
+    <TextView
+        android:id="@+id/birthdayLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:textSize="18sp"
+        android:text="@string/birthday" />
+    <TextView
+        android:id="@+id/birthday"
+        android:layout_margin="20dp"
+        android:textSize="18sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter" />
+    <Button
+        android:id="@+id/birthdayButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:text="@string/select" />
+    <TextView
+        android:id="@+id/genderLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:textSize="18sp"
+        android:text="@string/gender" />
+    <Spinner
+        android:id="@+id/gender"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/genderEnum" />
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:text="@string/save" />
+</LinearLayout>

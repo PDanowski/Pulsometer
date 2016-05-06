@@ -124,6 +124,7 @@
     <Compile Include="Dependencies\Container.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Dialogs\CompletedMeasureDialog.cs" />
+    <Compile Include="Dialogs\DatePickerDialog.cs" />
     <Compile Include="Dialogs\MeasuresOfDayDialog.cs" />
     <Compile Include="Dialogs\WelcomeDialog.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -176,9 +177,6 @@
       <Project>{718f356f-0e38-49f5-adc9-a56cd4cb791e}</Project>
       <Name>Pulsometer.ViewModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AlarmClock.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\menu_drawer.xml" />

@@ -73,12 +73,11 @@ namespace Pulsometer.ViewModel.ViewModels
             UserSerializer.Serialize(config);
         }
 
-        public void SetUserConfiguration(string name, string age, string gender)
+        public void SetUserConfiguration(string name, DateTime birthday, string gender)
         {
             config.Name = name;
-            config.Age = Int32.Parse(age);
+            config.Birthday = birthday;
             config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
-            config.Notifications = new List<DateTime>();
         }
 
         public void LoadUserConfiguration()

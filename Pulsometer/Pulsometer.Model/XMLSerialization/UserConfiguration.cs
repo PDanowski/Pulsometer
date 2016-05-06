@@ -21,26 +21,9 @@ namespace Pulsometer.Model.Models
         public string Name { get; set; }
 
         [System.Xml.Serialization.XmlElement("Age")]
-        public int Age { get; set; }
+        public DateTime Birthday { get; set; }
 
         [System.Xml.Serialization.XmlElement("Gender")]
         public Gender Gender { get; set; }
-
-        [System.Xml.Serialization.XmlElement("Notifications")]
-        private List<DateTime> notifications;
-        public List<DateTime> Notifications
-        {
-            get
-            {
-                if (notifications == null)
-                    notifications = new List<DateTime>();
-                return notifications;
-            }
-
-            set
-            {
-                notifications = value;
-            }
-        }
     }
 }

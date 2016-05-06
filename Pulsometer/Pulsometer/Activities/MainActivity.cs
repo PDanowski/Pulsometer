@@ -232,7 +232,7 @@ namespace Pulsometer.Activities
 
         void IMainViewAccess.DisplayWelcomeDialog()
         {
-            var welcomeDialog = new WelcomeDialog(this, LayoutInflater, viewModel);
+            var welcomeDialog = new WelcomeDialog(this, LayoutInflater, viewModel, FragmentManager);
             welcomeDialog.Show();
         }
 

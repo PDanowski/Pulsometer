@@ -11,8 +11,7 @@ namespace Pulsometer.Model.XMLSerialization
     public interface IUserConfiguration
     {
         string Name { get; set; }
-        int Age { get; set; }
+        DateTime Birthday { get; set; }
         Gender Gender { get; set; }
-        List<DateTime> Notifications { get; set; }
     }
 }
