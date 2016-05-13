@@ -35,7 +35,7 @@ namespace Pulsometer.Activities
         private ActionBarDrawerToggle myActionBarDrawerToggle;
         private Button measureHeartRateButton;
         private ProgressDialog measureProgress;
-        private IViewModelsFactory viewModelFactory;
+        private readonly IViewModelsFactory viewModelFactory;
 
         private bool isMeasureTargetReached = false;
 

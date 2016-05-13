@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.XMLSerialization;
+using Pulsometer.ViewModel.Interfaces;
 
-namespace Pulsometer.Model.Models
+namespace Pulsometer.ViewModel.Services
 {
-    public static class PulseData
+    public class ProperPulseRangeCounter : IProperPulseRangeCounter
     {
-        public static Range GetAverageRange(IUserConfiguration config)
+        public Range GetAverageRange(IUserConfiguration config)
         {
-            int age = DateTime.Today.Year - config.Birthday.Year;
+            var age = CountAge(config.Birthday);
 
-            if (config.Gender == Gender.Mężczyzna)
+            if (config.Gender == Gender.Man)
             {
                 if (age < 1)
                 {
@@ -68,7 +67,7 @@ namespace Pulsometer.Model.Models
                     return null;
                 }
             }
-            else if (config.Gender == Gender.Kobieta)
+            else if (config.Gender == Gender.Woman)
             {
                 if (age < 1)
                 {
@@ -129,11 +128,18 @@ namespace Pulsometer.Model.Models
             }
         }
 
-        public static Range GetFullRange(IUserConfiguration config)
+        private int CountAge(DateTime birthday)
         {
-            int age = DateTime.Today.Year - config.Birthday.Year;
+            int age = DateTime.Today.Year - birthday.Year;
+            if (birthday > DateTime.Today.AddYears(-age)) age--;
+            return age;
+        }
 
-            if (config.Gender == Gender.Mężczyzna)
+        public Range GetFullRange(IUserConfiguration config)
+        {
+            var age = CountAge(config.Birthday);
+
+            if (config.Gender == Gender.Man)
             {
                 if (age < 1)
                 {
@@ -188,7 +194,7 @@ namespace Pulsometer.Model.Models
                     return null;
                 }
             }
-            else if (config.Gender == Gender.Kobieta)
+            else if (config.Gender == Gender.Woman)
             {
                 if (age < 1)
                 {
@@ -247,18 +253,6 @@ namespace Pulsometer.Model.Models
             {
                 return null;
             }
-        }
-    }
-
-    public class Range
-    {
-        public int Lower { get; set; }
-        public int Upper { get; set; }
-
-        public Range(int lower, int upper)
-        {
-            this.Lower = lower;
-            this.Upper = upper;
         }
     }
 }

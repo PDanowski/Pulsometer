@@ -34,9 +34,6 @@ namespace Pulsometer.Adapters
             if (position < 0 || position >= Count)
                 throw new ArgumentOutOfRangeException(nameof(position));
 
-            //if (position == tripProvider.Count - 2)
-            //    tripProvider.FetchCommentsAsync();
-
             if (convertView == null)
             {
                 var inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);

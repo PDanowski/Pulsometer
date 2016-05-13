@@ -3,6 +3,7 @@ using Pulsometer.Model.Models;
 using Pulsometer.Model.SQLiteConnection;
 using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
+using Pulsometer.ViewModel.Services;
 using Pulsometer.ViewModel.ViewModels;
 
 namespace Pulsometer.ViewModel.Dependencies
@@ -21,6 +22,7 @@ namespace Pulsometer.ViewModel.Dependencies
             container.RegisterType<IViewModelsFactory, ViewModelsFactory>(new ContainerControlledLifetimeManager());
             container.RegisterType<ISQLiteConnector, SQLiteConnector>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUserConfiguration, UserConfiguration>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IProperPulseRangeCounter, ProperPulseRangeCounter>();
         }
     }
 }

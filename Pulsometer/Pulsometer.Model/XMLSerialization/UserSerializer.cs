@@ -33,7 +33,7 @@ namespace Pulsometer.Model.XMLSerialization
             {
                 reader = new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "user.xml"));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

@@ -16,7 +16,9 @@ namespace Pulsometer.Dialogs
         private AlertDialog dialog;
 
         private TextView heartRate;
+        private TextView rangeStatus;
         private Button saveButton;
+        private Button cancelButton;
         private EditText noteEditText;
         private ToggleButton stateGeneral;
         private ToggleButton stateBeforeExercise;
@@ -35,8 +37,10 @@ namespace Pulsometer.Dialogs
         private void InitializeObjects()
         {
             heartRate = dialog.FindViewById<TextView>(Resource.Id.heartRate);
+            rangeStatus = dialog.FindViewById<TextView>(Resource.Id.rangeStatus);
             noteEditText = dialog.FindViewById<EditText>(Resource.Id.note);
             saveButton = dialog.FindViewById<Button>(Resource.Id.saveButton);
+            cancelButton = dialog.FindViewById<Button>(Resource.Id.cancelButton);
 
             stateGeneral = dialog.FindViewById<ToggleButton>(Resource.Id.generalState);
             stateGeneral.Checked = true;
@@ -49,6 +53,12 @@ namespace Pulsometer.Dialogs
             stateAfterExercise.Click += (sender, args) => SetState(State.AfterExercise);
             stateRest.Click += (sender, args) => SetState(State.Rest);
             saveButton.Click += SaveButtonOnClick;
+            cancelButton.Click += CancelButtonOnClick;
+        }
+
+        private void CancelButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            dialog.Dismiss();
         }
 
         private void SetState(State state)
@@ -81,7 +91,26 @@ namespace Pulsometer.Dialogs
 
         public float HeartRate
         {
-            set { heartRate.Text = $"{value.ToString("##")} ud./min"; }
+            set
+            {
+               HandleHeartRate(value);
+            }
+        }
+
+        private void HandleHeartRate(float heartRateValue)
+        {
+            heartRate.Text = $"{heartRateValue.ToString("##")} ud./min";
+            var averageRange = viewModel.GetAverageRange();
+            var fullRange = viewModel.GetFullRange();
+
+            if (averageRange.IsProper(heartRateValue))
+            {
+                rangeStatus.Text = $"Puls w normie.\nŚredni zakres pulsu spoczynkowego to \n{averageRange.Lower} - {averageRange.Upper}";
+            }
+            else
+            {
+                rangeStatus.Text = $"Puls poza norma.\nŚredni zakres pulsu spoczynkowego to \n{averageRange.Lower} - {averageRange.Upper}";
+            }
         }
     }
 }

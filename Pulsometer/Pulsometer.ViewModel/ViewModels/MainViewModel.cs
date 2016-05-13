@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using Pulsometer.Model.Models;
 using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.SQLiteConnection;
@@ -15,13 +12,16 @@ namespace Pulsometer.ViewModel.ViewModels
     public class MainViewModel
     {
         private readonly IMainViewAccess access;
+        private readonly IProperPulseRangeCounter properPulseRangeCounter;
         private readonly ISQLiteConnector sqLiteConnector;
-        private IList<SingleMeasurement> singleMeasurements;
         private IUserConfiguration config;
+        private IList<SingleMeasurement> singleMeasurements;
 
-        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector)
+        public MainViewModel(IMainViewAccess access, ISQLiteConnector sqLiteConnector,
+            IProperPulseRangeCounter properPulseRangeCounter)
         {
             this.access = access;
+            this.properPulseRangeCounter = properPulseRangeCounter;
             this.sqLiteConnector = new SQLiteConnector();
             sqLiteConnector.CreateTableAsync();
         }
@@ -38,7 +38,7 @@ namespace Pulsometer.ViewModel.ViewModels
 
         public void StartMeasure()
         {
-            this.singleMeasurements = new List<SingleMeasurement>();
+            singleMeasurements = new List<SingleMeasurement>();
 
             access.DisplayProgressDialog();
             access.RegisterHRMSensore();
@@ -55,10 +55,10 @@ namespace Pulsometer.ViewModel.ViewModels
         {
             var measurementValue = singleMeasurements.Average(m => m.Value);
 
-            var measurement = new Measurement()
+            var measurement = new Measurement
             {
                 Value = measurementValue,
-                Date = DateTime.Now, 
+                Date = DateTime.Now,
                 Note = note,
                 State = state
             };
@@ -73,11 +73,11 @@ namespace Pulsometer.ViewModel.ViewModels
             UserSerializer.Serialize(config);
         }
 
-        public void SetUserConfiguration(string name, DateTime birthday, string gender)
+        public void SetUserConfiguration(string name, DateTime birthday, Gender gender)
         {
             config.Name = name;
             config.Birthday = birthday;
-            config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
+            config.Gender = gender;
         }
 
         public void LoadUserConfiguration()
@@ -94,5 +94,15 @@ namespace Pulsometer.ViewModel.ViewModels
         }
 
         public event EventHandler<EventArgs> ListReachedTargetEvent;
+
+        public Range GetAverageRange()
+        {
+            return properPulseRangeCounter.GetAverageRange(config);
+        }
+
+        public Range GetFullRange()
+        {
+            return properPulseRangeCounter.GetFullRange(config);
+        }
     }
 }

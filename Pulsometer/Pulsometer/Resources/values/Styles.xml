@@ -37,7 +37,7 @@
 
   <style name="option">
     <item name="android:layout_marginRight">8dp</item>
-    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginLeft">8dp</item>
     <item name="android:layout_marginBottom">16dp</item>
     <item name="android:gravity">center</item>
   </style>
@@ -45,7 +45,8 @@
   <style name="optionsHeader">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_margin">8dp</item>
     <item name="android:textSize">12dp</item>
-    <item name="android:paddingTop">48dp</item>
+    <item name="android:paddingTop">8dp</item>
   </style>
 </resources>

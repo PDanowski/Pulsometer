@@ -6,10 +6,12 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.ViewModel.ViewModels;
 
 namespace Pulsometer.Dialogs
@@ -78,10 +80,17 @@ namespace Pulsometer.Dialogs
 
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-            viewModel.SetUserConfiguration(name.Text, selectedDate, gender.SelectedItem.ToString());
+            var parsedGender = ParseStringToGenderEnum(gender.SelectedItem.ToString());
+            viewModel.SetUserConfiguration(name.Text, selectedDate, parsedGender);
             viewModel.SaveUserConfiguration();
             dialog.Dismiss();
             Toast.MakeText(context, "Zapisano", ToastLength.Short).Show();
+        }
+
+        private Gender ParseStringToGenderEnum(string gender)
+        {
+            var genders = context.Resources.GetStringArray(Resource.Array.genderEnum);
+            return gender == genders[0] ? Gender.Man : Gender.Woman;
         }
 
         private void ExitButtonOnClick(object sender, EventArgs eventArgs)

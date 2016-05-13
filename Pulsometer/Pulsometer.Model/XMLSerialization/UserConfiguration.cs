@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using Pulsometer.Model.XMLSerialization;
+using Pulsometer.Model.Models.Enums;
 
-namespace Pulsometer.Model.Models
+namespace Pulsometer.Model.XMLSerialization
 {
-    public enum Gender
-    {
-        Mężczyzna,
-        Kobieta
-    }
-
     [Serializable()]
     public class UserConfiguration : IUserConfiguration
     {

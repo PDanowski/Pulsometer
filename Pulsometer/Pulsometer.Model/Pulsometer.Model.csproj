@@ -55,8 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\Enums\State.cs" />
-    <Compile Include="Models\PulseData.cs" />
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Models\SingleMeasurement.cs" />
     <Compile Include="SQLiteConnection\ISQLiteConnector.cs" />
     <Compile Include="SQLiteConnection\SQLiteConnector.cs" />

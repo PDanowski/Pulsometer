@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
 
@@ -32,11 +33,11 @@ namespace Pulsometer.ViewModel.ViewModels
             access.SetUserConfig(config);
         }
 
-        public void SetUserConfiguration(string name, DateTime birthday, string gender)
+        public void SetUserConfiguration(string name, DateTime birthday, Gender gender)
         {
             config.Name = name;
             config.Birthday= birthday;
-            config.Gender = (Gender)Enum.Parse(typeof(Gender), gender);
+            config.Gender = gender;
         }
 
     }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.XMLSerialization;
 
 namespace Pulsometer.ViewModel.Interfaces
@@ -12,6 +8,5 @@ namespace Pulsometer.ViewModel.Interfaces
     {
         void SetField(string name, Gender gender, DateTime birthday);
         void SetUserConfig(IUserConfiguration config);
-
     }
 }

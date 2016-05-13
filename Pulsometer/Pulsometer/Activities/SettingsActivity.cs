@@ -1,20 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Pulsometer.Dependencies;
 using Pulsometer.Dialogs;
-using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 using Pulsometer.Model.XMLSerialization;
 using Pulsometer.ViewModel.Interfaces;
 using Pulsometer.ViewModel.ViewModels;
@@ -25,8 +18,6 @@ namespace Pulsometer.Activities
     [Activity(Label = "Ustawienia", Theme = "@style/MyTheme", ScreenOrientation = ScreenOrientation.Portrait)]
     public class SettingsActivity : AppCompatActivity, ISettingsViewAccess
     {
-        private readonly LayoutInflater inflater;
-        private readonly Context context;
         private readonly SettingsViewModel viewModel;
         private readonly IViewModelsFactory viewModelFactory;
 
@@ -36,7 +27,6 @@ namespace Pulsometer.Activities
         private Button saveButton;
         private Button birthdayButton;
         private Toolbar toolbar;
-        private DrawerLayout mainDrawer;
 
         private DateTime selectedDate;
 
@@ -78,7 +68,7 @@ namespace Pulsometer.Activities
             name.Text = uname;
             birthday.Text = ubirthday.Date.ToShortDateString();
             selectedDate = ubirthday;
-            gender.SetSelection(GetSpinnerIndex(gender, ugender.ToString()));
+            gender.SetSelection((int)ugender);
         }
 
         public void ShowDatePickerDialog(object sender, EventArgs eventArgs)
@@ -89,7 +79,6 @@ namespace Pulsometer.Activities
                 selectedDate = time;
             }), selectedDate);
             frag.Show(FragmentManager, "Wybierz datê urodzin");
-
         }
 
         public void SetUserConfig(IUserConfiguration config)
@@ -97,25 +86,18 @@ namespace Pulsometer.Activities
             viewModelFactory.SetUserConfiguration(config);
         }
 
-        private int GetSpinnerIndex(Spinner spinner, String value)
-        {
-            int index = 0;
-
-            for (int i = 0; i < spinner.Adapter.Count; i++)
-            {
-                if (spinner.GetItemAtPosition(i).Equals(value))
-                {
-                    index = i;
-                }
-            }
-            return index;
-        }
-
         private void SaveButtonOnClick(object sender, EventArgs eventArgs)
         {
-            viewModel.SetUserConfiguration(name.Text, selectedDate, gender.SelectedItem.ToString());
+            var parsedGender = ParseStringToGenderEnum(gender.SelectedItem.ToString());
+            viewModel.SetUserConfiguration(name.Text, selectedDate, parsedGender);
             viewModel.SaveUserConfiguration();
             Toast.MakeText(this, "Zapisano", ToastLength.Short).Show();
+        }
+        
+        private Gender ParseStringToGenderEnum(string gender)
+        {
+            var genders = Resources.GetStringArray(Resource.Array.genderEnum);
+            return gender == genders[0] ? Gender.Man : Gender.Woman;
         }
 
         private void SetUpToolbar()

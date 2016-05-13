@@ -7,15 +7,25 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:gravity="center"
         android:textSize="22sp"
         android:text="@string/measureCompleted" />
     <TextView
         android:id="@+id/heartRate"
+        android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="8dp"
         android:textSize="50sp" />
+    <TextView
+        android:id="@+id/rangeStatus"
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:textSize="18sp" />
     <EditText
         android:id="@+id/note"
         android:layout_margin="8dp"
