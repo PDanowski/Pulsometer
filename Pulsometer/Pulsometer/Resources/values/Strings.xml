@@ -37,11 +37,12 @@
     <item>Mężczyzna</item>
     <item>Kobieta</item>
   </string-array>
-  
+
+  <string name="state">Stan:</string>
   <string name="pickCurrentState">Wybierz bieżący stan</string>
   <string name="generalState">Ogólny</string>
-  <string name="beforeExerciseState">Przed\nćwiczeniem</string>
-  <string name="afterExerciseState">Po\nćwiczeniu</string>
+  <string name="beforeExerciseState">Przed\nćwiczeniami</string>
+  <string name="afterExerciseState">Po\nćwiczeniach</string>
   <string name="restState">Odpoczynek</string>
 
 </resources>

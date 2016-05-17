@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Pulsometer.Model.Models.Enums;
@@ -105,11 +106,13 @@ namespace Pulsometer.Dialogs
 
             if (averageRange.IsProper(heartRateValue))
             {
-                rangeStatus.Text = $"Puls w normie.\nŚredni zakres pulsu spoczynkowego to \n{averageRange.Lower} - {averageRange.Upper}";
+                rangeStatus.Text = $"Puls w normie.\nŚredni zakres pulsu spoczynkowego dla Ciebie to: \n{averageRange.Lower} - {averageRange.Upper}";
+                rangeStatus.SetTextColor(Color.Green);
             }
             else
             {
-                rangeStatus.Text = $"Puls poza norma.\nŚredni zakres pulsu spoczynkowego to \n{averageRange.Lower} - {averageRange.Upper}";
+                rangeStatus.Text = $"Puls poza normą !\nŚredni zakres pulsu spoczynkowego dla Ciebie to: \n{averageRange.Lower} - {averageRange.Upper}";
+                rangeStatus.SetTextColor(Color.Red);
             }
         }
     }

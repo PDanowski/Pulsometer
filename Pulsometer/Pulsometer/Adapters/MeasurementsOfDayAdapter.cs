@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Pulsometer.Model.Models;
+using Pulsometer.Model.Models.Enums;
 
 namespace Pulsometer.Adapters
 {
@@ -48,7 +49,32 @@ namespace Pulsometer.Adapters
             var measurementValue = convertView.FindViewById<TextView>(Resource.Id.measurementValue);
             measurementValue.Text = item.Value.ToString("###");
 
+            var stateValue = convertView.FindViewById<TextView>(Resource.Id.statetValue);
+            stateValue.Text = ConvertState(item.State);
+
             return convertView;
+        }
+
+        private string ConvertState(State s)
+        {
+            switch (s)
+            {
+                case State.General:
+                    return "ogólny";
+                    break;
+                case State.AfterExercise:
+                    return "po æwiczeniach";
+                    break;
+                case State.BeforeExercise:
+                    return "przed æwiczeniami";
+                    break;
+                case State.Rest:
+                    return "odpoczynek";
+                    break;
+                default:
+                    return "brak";
+                    break;
+            }
         }
 
         public override int Count => measurementsOfDay.Count;

@@ -83,7 +83,6 @@ namespace Pulsometer.ViewModel.ViewModels
         public void LoadUserConfiguration()
         {
             config = UserSerializer.Deserialize();
-
             if (config == null)
             {
                 config = new UserConfiguration();

@@ -68,7 +68,7 @@ namespace Pulsometer.Dialogs
 
         public void ShowDatePickerDialog(object sender, EventArgs eventArgs)
         {
-            DateTime defaultDate = DateTime.Today.AddYears(-15);
+            DateTime defaultDate = DateTime.Today.AddYears(-18);
             DatePickerDialogFragment frag = DatePickerDialogFragment.NewInstance((delegate (DateTime time) 
             {
                 birthdayText.Text= time.Date.ToShortDateString();
