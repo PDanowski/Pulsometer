@@ -107,7 +107,7 @@ namespace Pulsometer.Dialogs
             if (averageRange.IsProper(heartRateValue))
             {
                 rangeStatus.Text = $"Puls w normie.\nŚredni zakres pulsu spoczynkowego dla Ciebie to: \n{averageRange.Lower} - {averageRange.Upper}";
-                rangeStatus.SetTextColor(Color.Green);
+                rangeStatus.SetTextColor(Color.LimeGreen);
             }
             else
             {

@@ -2,6 +2,7 @@
 <resources>
   <string name="applicationName">Pulsometer</string>
   <string name="calendarItem">Kalendarz</string>
+  <string name="lastMeasurementsItem">Ostatnie pomiary</string>
   <string name="settingsItem">Ustawienia</string>
   <string name="infoItem">Informacje</string>
   <string name="welcome">Witaj użytkowniku !</string>

@@ -4,6 +4,10 @@
         android:id="@+id/CalendarItem"
         android:title="@string/calendarItem"
         android:icon="@drawable/Calendar"/>
+  <item
+        android:id="@+id/LastMeasurementsItem"
+        android:title="@string/lastMeasurementsItem"
+        android:icon="@drawable/Chart"/>
     <item
         android:id="@+id/InfoItem"
         android:title="@string/infoItem"

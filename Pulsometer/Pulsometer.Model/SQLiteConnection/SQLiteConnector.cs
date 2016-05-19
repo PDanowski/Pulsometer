@@ -45,6 +45,20 @@ namespace Pulsometer.Model.SQLiteConnection
             return data;
         }
 
+        public List<Measurement> SelectAllSync()
+        {
+            var data = connection.Table<Measurement>().ToListAsync().Result;
+
+            return data;
+        }
+
+        public List<Measurement> SelectLastMeasurementsAsync(int n)
+        {
+            var data = connection.Table<Measurement>().OrderByDescending(x => x.Date).Take(n).ToListAsync().Result;
+
+            return data;
+        }
+
         public async Task<List<Measurement>> SelectAllByDateAsync(DateTime date)
         {
             var oneDayLaterDate = date.AddDays(1);

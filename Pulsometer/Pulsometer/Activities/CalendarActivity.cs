@@ -8,7 +8,6 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using com.alliance.calendar;
-using Java.Util;
 using Pulsometer.Dependencies;
 using Pulsometer.Dialogs;
 using Pulsometer.Model.Models;
@@ -59,6 +58,7 @@ namespace Pulsometer.Activities
             calendar.OnCalendarSelectedDate += CalendarOnOnCalendarSelectedDate;
 
             toolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
+
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

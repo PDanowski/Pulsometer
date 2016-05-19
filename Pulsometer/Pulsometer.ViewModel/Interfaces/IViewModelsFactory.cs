@@ -9,6 +9,7 @@ namespace Pulsometer.ViewModel.Interfaces
         CalendarViewModel GetCalendarViewModel(ICalendarViewAccess access);
         InfoViewModel GetInfoViewModel(IInfoViewAccess access);
         SettingsViewModel GetSettingsViewModel(ISettingsViewAccess access);
+        LastMeasurementsViewModel GetLastMeasurementsViewModel(ILastMeasurementsViewAccess access);
         void SetUserConfiguration(IUserConfiguration config);
 
     }

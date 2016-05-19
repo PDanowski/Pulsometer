@@ -14,5 +14,7 @@ namespace Pulsometer.Model.SQLiteConnection
         Task<List<Measurement>> SelectAllAsync();
         Task<List<Measurement>> SelectAllByDateAsync(DateTime date);
         Task<Measurement> SelectFirstOrDefaultAsync();
+        List<Measurement> SelectLastMeasurementsAsync(int n);
+        List<Measurement> SelectAllSync();
     }
 }

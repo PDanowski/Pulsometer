@@ -115,6 +115,13 @@ namespace Pulsometer.Activities
                         StartActivity(intent);
                         break;
                     }
+                case Resource.Id.LastMeasurementsItem:
+                    {
+                        Intent intent = new Intent();
+                        intent.SetClass(this, typeof(LastMeasurementsActivity));
+                        StartActivity(intent);
+                        break;
+                    }
                 case Resource.Id.InfoItem:
                     {
                         Intent intent = new Intent();

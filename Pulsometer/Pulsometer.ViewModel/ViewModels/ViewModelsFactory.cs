@@ -42,5 +42,10 @@ namespace Pulsometer.ViewModel.ViewModels
         {
             return new SettingsViewModel(access, userConfig);
         }
+
+        public LastMeasurementsViewModel GetLastMeasurementsViewModel(ILastMeasurementsViewAccess access)
+        {
+            return new LastMeasurementsViewModel(access, sqLiteConnector);
+        }
     }
 }
